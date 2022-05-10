@@ -1,13 +1,18 @@
 package com.example.e_exam.network
 
+import com.example.e_exam.network.LevelsAndDepartment.LevelAndDepartmentRespond
+import com.example.e_exam.network.logIn.LogInRespond
+import com.example.e_exam.network.logOut.LogOutRespond
+import com.example.e_exam.network.signUp.RegisterRespond
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.*
 
 //base url of website
 private const val BASE_URL =
-    ""
+    "https://e-exam.ahmed-projects.me/api/student/"
 
 //moshi build which we will use to convert json to object kotlin
 private val moshi = Moshi.Builder()
@@ -22,6 +27,19 @@ private val retrofit = Retrofit.Builder()
 
 
 interface ExamApiService {
+    @GET("GetLevelsAndDept")
+    suspend fun getLevelsAndDepartment(@Query("lang") lang : String) : LevelAndDepartmentRespond
+
+    @FormUrlEncoded
+    @POST("Register")
+    suspend fun createAccount(@Field("email") email : String, @Field("password") password : String, @Field("password_confirmation") password_confirmation: String, @Field("level_id") level_id: Int,@Field("dept_id") dept_id: Int) : RegisterRespond
+
+    @FormUrlEncoded
+    @POST("Login")
+    suspend fun logIn(@Field("email")email: String, @Field("password") password : String) : LogInRespond
+
+    @POST("Logout")
+    suspend fun logOut(@Header("Authorization") token: String) : LogOutRespond
 }
 
 //object to make singleton from the retrofit

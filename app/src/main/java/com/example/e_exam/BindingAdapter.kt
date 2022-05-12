@@ -14,6 +14,5 @@ fun bindSplashScreenAnimation(logo: ImageView, splashScreenFragment: SplashScree
     }
 
 }
-
 class BindingAdapter {
 }

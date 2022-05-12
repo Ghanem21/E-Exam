@@ -1,134 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/home_background"
-    tools:context=".fragment.LogInFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="logInFragment"
+            type="com.example.e_exam.fragment.LogInFragment" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:paddingTop="16dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/home_background"
+        tools:context=".fragment.LogInFragment">
 
-        <ImageView
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/logo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="132dp"
-            android:text="@string/app_name"
-            android:textAllCaps="true"
-            android:textSize="16sp" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/icon_email"
-                android:layout_width="23dp"
-                android:layout_height="29dp"
-                android:importantForAccessibility="no"
-                app:layout_constraintBottom_toBottomOf="@+id/email_text_input"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/email_text_input"
-                app:srcCompat="@drawable/ic_baseline_email_24" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_text_input"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:hint="@string/email"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/icon_email"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/username_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/icon_lock"
-                android:layout_width="23dp"
-                android:layout_height="29dp"
-                android:importantForAccessibility="no"
-                app:layout_constraintBottom_toBottomOf="@+id/password_text_input"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/password_text_input"
-                app:srcCompat="@drawable/ic_baseline_lock_24" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_text_input"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:hint="@string/password"
-                app:errorEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/icon_lock"
-                app:layout_constraintTop_toTopOf="parent"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:padding="4dp">
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:paddingTop="16dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/next_button"
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="@string/logo"
+                app:srcCompat="@drawable/logo" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="4dp"
-                android:elevation="8dp"
-                android:stateListAnimator="@null"
-                android:text="@string/log_in"
-                app:cornerRadius="4dp" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="132dp"
+                android:text="@string/app_name"
+                android:textAllCaps="true"
+                android:textSize="16sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cancel_button"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/icon_email"
+                    android:layout_width="23dp"
+                    android:layout_height="29dp"
+                    android:importantForAccessibility="no"
+                    app:layout_constraintBottom_toBottomOf="@+id/email_text_input"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/email_text_input"
+                    app:srcCompat="@drawable/ic_baseline_email_24" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_text_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:hint="@string/email"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon_email"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/icon_lock"
+                    android:layout_width="23dp"
+                    android:layout_height="29dp"
+                    android:importantForAccessibility="no"
+                    app:layout_constraintBottom_toBottomOf="@+id/password_text_input"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/password_text_input"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_text_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:hint="@string/password"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon_lock"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:layout_toStartOf="@id/next_button"
-                android:text="@string/sign_up" />
-        </RelativeLayout>
-    </LinearLayout>
-</ScrollView>
+                android:layout_margin="4dp"
+                android:padding="4dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/next_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="4dp"
+                    android:elevation="8dp"
+                    android:onClick="@{() -> logInFragment.onLogIn()}"
+                    android:stateListAnimator="@null"
+                    android:text="@string/log_in"
+                    app:cornerRadius="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancel_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_toStartOf="@id/next_button"
+                    android:text="@string/sign_up"
+                    android:onClick="@{() -> logInFragment.onSignUp()}"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

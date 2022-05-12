@@ -1,6 +1,6 @@
 package com.example.e_exam.network
 
-import com.example.e_exam.network.LevelAndDepartment.LevelAndDepartmentRespond
+import com.example.e_exam.network.LevelsAndDepartment.LevelAndDepartmentRespond
 import com.example.e_exam.network.logIn.LogInRespond
 import com.example.e_exam.network.logOut.LogOutRespond
 import com.example.e_exam.network.signUp.RegisterRespond

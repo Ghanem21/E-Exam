@@ -1,4 +1,4 @@
-package com.example.e_exam.network.LevelsAndDepartment
+package com.example.e_exam.network.levelsAndDepartments
 
 import com.squareup.moshi.Json
 

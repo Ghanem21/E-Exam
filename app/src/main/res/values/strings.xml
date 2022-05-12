@@ -7,5 +7,6 @@
     <string name="email">Email</string>
     <string name="password">password</string>
     <string name="confirm_password">confirm password</string>
+    <string name="logo">logo</string>
 
 </resources>

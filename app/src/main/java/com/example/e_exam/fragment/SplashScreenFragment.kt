@@ -1,37 +1,50 @@
 package com.example.e_exam.fragment
 
-import android.content.SharedPreferences
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.e_exam.R
+import com.example.e_exam.databinding.FragmentSplashScreenBinding
+import kotlinx.coroutines.*
 
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenFragment : Fragment() {
 
-
-    var logo: ImageView? = null
-    var animFade: Animation? = null
-    var sharedPreferences: SharedPreferences? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
+    private var binding:FragmentSplashScreenBinding? = null
+    private lateinit var job :Job
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_splash_screen, container, false)
+        binding = FragmentSplashScreenBinding.inflate(inflater,container,false)
+        return binding!!.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.splashScreen = this
+        job = Job()
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+        job.cancel()
+    }
+
+    fun navigate(){
+        val coroutineScope = CoroutineScope(Dispatchers.Main + job)
+        coroutineScope. launch {
+            delay(3000)
+            findNavController().navigate(R.id.action_splashScreenFragment_to_logInFragment)
+        }
+    }
 
 }

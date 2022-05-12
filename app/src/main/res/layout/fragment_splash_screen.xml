@@ -1,35 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.SplashScreenFragment"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    <data>
+        <variable
+            name="splashScreen"
+            type="com.example.e_exam.fragment.SplashScreenFragment" />
+    </data>
 
-    <ImageView
-        android:id="@+id/logo"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="346dp"
-        android:layout_centerInParent="true"
-        android:layout_margin="80dp"
-        android:src="@drawable/logo" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragment.SplashScreenFragment"
+        tools:ignore="UseCompoundDrawables">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/app_name"
-        android:textAllCaps="true"
-        android:layout_marginTop="-100dp"
-        android:fontFamily="casual"
-        android:textColor="@color/teal_700"
-        android:textSize="50sp" />
 
-        </LinearLayout>
-</FrameLayout>
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="346dp"
+                android:layout_margin="80dp"
+                android:src="@drawable/logo"
+                animation="@{splashScreen}"
+                android:contentDescription="@string/logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_name"
+                android:textAllCaps="true"
+                android:layout_marginTop="-100dp"
+                android:fontFamily="casual"
+                android:textColor="@color/teal_700"
+                android:textSize="50sp" />
+
+
+    </LinearLayout>
+</layout>

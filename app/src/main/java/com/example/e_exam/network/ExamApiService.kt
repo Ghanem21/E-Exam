@@ -4,11 +4,13 @@ import com.example.e_exam.network.levelsAndDepartments.LevelAndDepartmentRespond
 import com.example.e_exam.network.logIn.LogInRespond
 import com.example.e_exam.network.logOut.LogOutRespond
 import com.example.e_exam.network.signUp.RegisterRespond
+import com.example.e_exam.network.studentSubject.GetStudentSubjectRespond
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
+
 
 //base url of website
 private const val BASE_URL =
@@ -40,6 +42,9 @@ interface ExamApiService {
 
     @POST("Logout")
     suspend fun logOut(@Header("Authorization") token: String) : LogOutRespond
+
+    @GET("Get_Student_Subjects")
+    suspend fun getStudentSubject(@Query("lang") lang:String , @Header("Authorization") token: String) : GetStudentSubjectRespond
 }
 
 //object to make singleton from the retrofit

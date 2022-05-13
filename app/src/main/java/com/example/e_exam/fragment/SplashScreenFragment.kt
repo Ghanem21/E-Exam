@@ -15,14 +15,14 @@ import kotlinx.coroutines.*
 @SuppressLint("CustomSplashScreen")
 class SplashScreenFragment : Fragment() {
 
-    private var binding:FragmentSplashScreenBinding? = null
-    private lateinit var job :Job
+    private var binding: FragmentSplashScreenBinding? = null
+    private lateinit var job: Job
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentSplashScreenBinding.inflate(inflater,container,false)
+        binding = FragmentSplashScreenBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
@@ -39,12 +39,11 @@ class SplashScreenFragment : Fragment() {
         job.cancel()
     }
 
-    fun navigate(){
+    fun navigate() {
         val coroutineScope = CoroutineScope(Dispatchers.Main + job)
-        coroutineScope. launch {
+        coroutineScope.launch {
             delay(3000)
             findNavController().navigate(R.id.action_splashScreenFragment_to_logInFragment)
         }
     }
-
 }

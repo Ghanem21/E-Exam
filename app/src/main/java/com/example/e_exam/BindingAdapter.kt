@@ -1,6 +1,7 @@
 package com.example.e_exam
 
 import android.view.animation.AnimationUtils.loadAnimation
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.example.e_exam.fragment.SplashScreenFragment
@@ -14,5 +15,6 @@ fun bindSplashScreenAnimation(logo: ImageView, splashScreenFragment: SplashScree
     }
 
 }
+
 class BindingAdapter {
 }

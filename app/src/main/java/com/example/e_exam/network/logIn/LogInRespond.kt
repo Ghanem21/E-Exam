@@ -6,5 +6,5 @@ data class LogInRespond(
     val status: Boolean,
     val errNum: String,
     val msg: String,
-    @Json(name = "Student") val student: Student
+    @Json(name = "Student") val student: Student?
 )

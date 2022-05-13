@@ -25,6 +25,16 @@
             android:padding="24dp"
             android:paddingTop="16dp">
 
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-24dp"
+                android:layout_marginTop="-24dp"
+                android:layout_marginEnd="-24dp"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
             <ImageView
                 android:layout_width="128dp"
                 android:layout_height="128dp"
@@ -72,7 +82,7 @@
                         android:id="@+id/email_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="textEmailAddress"
                         android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -121,7 +131,7 @@
                 android:padding="4dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/next_button"
+                    android:id="@+id/logIn_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -133,14 +143,14 @@
                     app:cornerRadius="4dp" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cancel_button"
+                    android:id="@+id/signUp_button"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
-                    android:layout_toStartOf="@id/next_button"
-                    android:text="@string/sign_up"
-                    android:onClick="@{() -> logInFragment.onSignUp()}"/>
+                    android:layout_toStartOf="@id/logIn_button"
+                    android:onClick="@{() -> logInFragment.onSignUp()}"
+                    android:text="@string/sign_up" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_exam.network.ExamApi
+import com.example.e_exam.network.logIn.LogInRespond
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class LogInViewModel : ViewModel() {
@@ -15,14 +18,20 @@ class LogInViewModel : ViewModel() {
     private val _password = MutableLiveData<String>()
     val password: LiveData<String> = _password
 
-    fun doLogIn(email: String, password: String) {
-        viewModelScope.launch {
+    private val _logInRespond = MutableLiveData<LogInRespond>()
+    val logInRespond: LiveData<LogInRespond> = _logInRespond
+
+    fun doLogIn(email: String, password: String): Deferred<Any> {
+        return viewModelScope.async {
             _email.value = email
             _password.value = password
-            val logInRespond = ExamApi.retrofitService.logIn(email, password)
-            if (logInRespond.status) {
-                Log.d("TAG", "doLogIn: " + logInRespond.msg)
+
+            try {
+                _logInRespond.value = ExamApi.retrofitService.logIn(email, password)
+            } catch (ex: Exception) {
+                Log.d("TAG", "doLogIn:" + ex.message)
             }
+            return@async true
         }
     }
 

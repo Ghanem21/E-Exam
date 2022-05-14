@@ -67,13 +67,10 @@ class LogInFragment : Fragment() {
                 if (viewModel.logInRespond.value!!.errNum == "S000")
                 // navigate to Home Fragment
                 else if (viewModel.logInRespond.value!!.errNum == "E007")
-                    viewModel.logInRespond.value!!.msg.also {
-                        emailEditText.error = it
-                    }
+                    emailEditText.error = viewModel.logInRespond.value!!.msg
                 else if (viewModel.logInRespond.value!!.errNum == "E1001" || viewModel.logInRespond.value!!.errNum == "E002")
-                    viewModel.logInRespond.value!!.msg.also {
-                        passwordEditText.error = it
-                    }
+                    passwordEditText.error = viewModel.logInRespond.value!!.msg
+
                 logInButton.isEnabled = true
             }
         }

@@ -33,6 +33,42 @@
             android:textAllCaps="true"
             android:textSize="16sp" />
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/icon_name"
+                android:layout_width="23dp"
+                android:layout_height="29dp"
+                android:importantForAccessibility="no"
+                app:layout_constraintBottom_toBottomOf="@+id/name_text_input"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/name_text_input"
+                app:srcCompat="@drawable/name_logo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_text_input"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="@string/username"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/icon_name"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -59,7 +95,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/username_edit_text"
+                    android:id="@+id/email_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -145,25 +181,25 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/icon"
+                android:id="@+id/icon_dept"
                 android:layout_width="23dp"
                 android:layout_height="29dp"
                 android:importantForAccessibility="no"
-                app:layout_constraintBottom_toBottomOf="@+id/menu"
+                app:layout_constraintBottom_toBottomOf="@+id/dept_spinner"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/menu"
-                app:srcCompat="@drawable/ic_baseline_lock_24" />
+                app:layout_constraintTop_toTopOf="@+id/dept_spinner"
+                app:srcCompat="@drawable/department_logo" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/menu"
+                android:id="@+id/dept_spinner"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:hint="@string/label"
+                android:hint="@string/department"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/icon"
+                app:layout_constraintStart_toEndOf="@+id/icon_dept"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints">
 
@@ -174,6 +210,72 @@
 
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/icon_lvl"
+                android:layout_width="23dp"
+                android:layout_height="29dp"
+                android:importantForAccessibility="no"
+                app:layout_constraintBottom_toBottomOf="@+id/level_spinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/level_spinner"
+                app:srcCompat="@drawable/level_logo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/level_spinner"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="@string/level"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_lvl"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logIn_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="4dp"
+                android:elevation="8dp"
+                android:onClick="@{() -> logInFragment.onLogIn()}"
+                android:stateListAnimator="@null"
+                android:text="@string/sign_up"
+                app:cornerRadius="4dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signUp_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_toStartOf="@id/logIn_button"
+                android:onClick="@{() -> logInFragment.onSignUp()}"
+                android:text="@string/log_in" />
+        </RelativeLayout>
 
 
     </LinearLayout>

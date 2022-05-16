@@ -9,7 +9,6 @@ import com.example.e_exam.network.ExamApi
 import com.example.e_exam.network.logIn.LogInRespond
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 class LogInViewModel : ViewModel() {
     private val _email = MutableLiveData<String>()
@@ -28,10 +27,11 @@ class LogInViewModel : ViewModel() {
 
             try {
                 _logInRespond.value = ExamApi.retrofitService.logIn(email, password)
+                return@async true
             } catch (ex: Exception) {
                 Log.d("TAG", "doLogIn:" + ex.message)
             }
-            return@async true
+            return@async false
         }
     }
 

@@ -14,7 +14,7 @@ import retrofit2.http.*
 
 //base url of website
 private const val BASE_URL =
-    "https://e-exam.ahmed-projects.me/api/student/"
+    "https://e-exam.ahmed-projects.me/"
 
 //moshi build which we will use to convert json to object kotlin
 private val moshi = Moshi.Builder()

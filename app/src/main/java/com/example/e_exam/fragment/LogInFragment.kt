@@ -16,7 +16,7 @@ import com.example.e_exam.viewModels.LogInViewModel
 import kotlinx.coroutines.*
 
 class LogInFragment : Fragment() {
-    private var binding: FragmentLogInBinding? = null
+    private lateinit var binding: FragmentLogInBinding
     private val viewModel: LogInViewModel by viewModels()
     private lateinit var parentJob: Job
 
@@ -26,12 +26,12 @@ class LogInFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_log_in, container, false)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.apply {
+        binding.apply {
             logInFragment = this@LogInFragment
         }
         parentJob = Job()
@@ -40,7 +40,7 @@ class LogInFragment : Fragment() {
     fun onLogIn() {
         lateinit var email: String
         lateinit var password: String
-        binding?.apply {
+        binding.apply {
             logInButton.isEnabled = false
             email = emailEditText.text.toString()
             password = passwordEditText.text.toString()
@@ -53,28 +53,28 @@ class LogInFragment : Fragment() {
         coroutineScope.launch {
 
             launch {
-                binding!!.progressBar.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.VISIBLE
             }
 
             if (end.await() == true) {
-                binding!!.progressBar.visibility = View.GONE
                 Toast.makeText(context, viewModel.logInRespond.value!!.msg, Toast.LENGTH_SHORT)
                     .show()
+
+
+                binding.apply {
+
+                    if (viewModel.logInRespond.value!!.errNum == "S000")
+                    // navigate to Home Fragment
+                    else if (viewModel.logInRespond.value!!.errNum == "E007")
+                        emailEditText.error = viewModel.logInRespond.value!!.msg
+                    else if (viewModel.logInRespond.value!!.errNum == "E1001" || viewModel.logInRespond.value!!.errNum == "E002")
+                        passwordEditText.error = viewModel.logInRespond.value!!.msg
+
+                }
             }
-
-            binding?.apply {
-
-                if (viewModel.logInRespond.value!!.errNum == "S000")
-                // navigate to Home Fragment
-                else if (viewModel.logInRespond.value!!.errNum == "E007")
-                    emailEditText.error = viewModel.logInRespond.value!!.msg
-                else if (viewModel.logInRespond.value!!.errNum == "E1001" || viewModel.logInRespond.value!!.errNum == "E002")
-                    passwordEditText.error = viewModel.logInRespond.value!!.msg
-
-                logInButton.isEnabled = true
-            }
+            binding.logInButton.isEnabled = true
+            binding.progressBar.visibility = View.GONE
         }
-
     }
 
     fun onSignUp() {
@@ -83,7 +83,6 @@ class LogInFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
         parentJob.cancel()
     }
 }

@@ -5,29 +5,54 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.example.e_exam.fragment.SignUpFragment
+import androidx.lifecycle.LiveData
 import com.example.e_exam.fragment.SplashScreenFragment
+import com.example.e_exam.network.levelsAndDepartments.Department
+import com.example.e_exam.network.levelsAndDepartments.Level
 
 @BindingAdapter("animation")
-fun bindSplashScreenAnimation(logo: ImageView, splashScreenFragment: SplashScreenFragment?){
-    splashScreenFragment.let{
+fun bindSplashScreenAnimation(logo: ImageView, splashScreenFragment: SplashScreenFragment?) {
+    splashScreenFragment.let {
         splashScreenFragment!!.navigate()
-        val animeFade = loadAnimation(splashScreenFragment.context,R.anim.faded_animation)
+        val animeFade = loadAnimation(splashScreenFragment.context, R.anim.faded_animation)
         logo.startAnimation(animeFade)
     }
 
 }
 
-@BindingAdapter("adapter")
-fun bindSpinnerData(spinner : AutoCompleteTextView,signUpFragment: SignUpFragment?){
-    signUpFragment.let {
-        val departments = signUpFragment!!.viewModel.departments.value ?: listOf()
-        val adapter = ArrayAdapter(
-            signUpFragment.requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            departments
-        )
-        spinner.setAdapter(adapter)
+@BindingAdapter("adapterDepartment")
+fun bindDepartment(
+    autoCompleteTextView: AutoCompleteTextView,
+    departments: LiveData<List<Department>>?
+) {
+    departments.let {
+        val items: List<Department>? = departments?.value
+        if (items != null) {
+            autoCompleteTextView.setAdapter(
+                ArrayAdapter(
+                    autoCompleteTextView.context,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    items
+                )
+            )
+        }
+    }
+}
+
+
+@BindingAdapter("adapterLevel")
+fun bindLevel(autoCompleteTextView: AutoCompleteTextView, levels: LiveData<List<Level>>?) {
+    levels.let {
+        val items: List<Level>? = levels?.value
+        if (items != null) {
+            autoCompleteTextView.setAdapter(
+                ArrayAdapter(
+                    autoCompleteTextView.context,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    items
+                )
+            )
+        }
     }
 }
 

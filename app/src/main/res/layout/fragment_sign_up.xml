@@ -8,6 +8,10 @@
         <variable
             name="signUpFragment"
             type="com.example.e_exam.fragment.SignUpFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.example.e_exam.viewModels.SignUpViewModel" />
     </data>
 
     <ScrollView
@@ -21,9 +25,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:clipChildren="false"
             android:clipToPadding="false"
+            android:orientation="vertical"
             android:padding="24dp"
             android:paddingTop="16dp">
 
@@ -229,10 +233,10 @@
                     tools:ignore="MissingConstraints">
 
                     <AutoCompleteTextView
+                        android:id="@+id/departments_autoComplete"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        app:adapter="@{signUpFragment}"
+                        android:inputType="none"
                         tools:ignore="LabelFor" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -267,10 +271,10 @@
                     tools:ignore="MissingConstraints">
 
                     <AutoCompleteTextView
+                        android:id="@+id/levels_autoComplete_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        app:adapter="@{signUpFragment}"
+                        android:inputType="none"
                         tools:ignore="LabelFor" />
 
                 </com.google.android.material.textfield.TextInputLayout>

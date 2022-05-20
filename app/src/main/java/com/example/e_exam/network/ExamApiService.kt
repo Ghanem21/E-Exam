@@ -14,7 +14,7 @@ import retrofit2.http.*
 
 //base url of website
 private const val BASE_URL =
-    "https://e-exam.ahmed-projects.me/"
+    "https://e-exam.ahmed-projects.me/api/student/"
 
 //moshi build which we will use to convert json to object kotlin
 private val moshi = Moshi.Builder()
@@ -30,21 +30,34 @@ private val retrofit = Retrofit.Builder()
 
 interface ExamApiService {
     @GET("GetLevelsAndDept")
-    suspend fun getLevelsAndDepartment(@Query("lang") lang : String) : LevelAndDepartmentRespond
+    suspend fun getLevelsAndDepartment(@Query("lang") lang: String): LevelAndDepartmentRespond
 
     @FormUrlEncoded
     @POST("Register")
-    suspend fun createAccount(@Field("email") email : String, @Field("password") password : String, @Field("password_confirmation") password_confirmation: String, @Field("level_id") level_id: Int,@Field("dept_id") dept_id: Int) : RegisterRespond
+    suspend fun createAccount(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("password_confirmation") password_confirmation: String,
+        @Field("level_id") level_id: Int,
+        @Field("dept_id") dept_id: Int
+    ): RegisterRespond
 
     @FormUrlEncoded
     @POST("Login")
-    suspend fun logIn(@Field("email")email: String, @Field("password") password : String) : LogInRespond
+    suspend fun logIn(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): LogInRespond
 
     @POST("Logout")
-    suspend fun logOut(@Header("Authorization") token: String) : LogOutRespond
+    suspend fun logOut(@Header("Authorization") token: String): LogOutRespond
 
     @GET("Get_Student_Subjects")
-    suspend fun getStudentSubject(@Query("lang") lang:String , @Header("Authorization") token: String) : GetStudentSubjectRespond
+    suspend fun getStudentSubject(
+        @Query("lang") lang: String,
+        @Header("Authorization") token: String
+    ): GetStudentSubjectRespond
 }
 
 //object to make singleton from the retrofit

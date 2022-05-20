@@ -47,28 +47,28 @@ class LogInFragment : Fragment() {
         }
 
 
-        val end = viewModel.doLogIn(email, password)
+
 
         val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
         coroutineScope.launch {
-
             launch {
                 binding.progressBar.visibility = View.VISIBLE
             }
-
-            if (end.await() == true) {
+            val end = viewModel.doLogIn(email, password)
+            if (end == true) {
                 Toast.makeText(context, viewModel.logInRespond.value!!.msg, Toast.LENGTH_SHORT)
                     .show()
 
-
+                val errNum = viewModel.logInRespond.value!!.errNum
+                val msg = viewModel.logInRespond.value!!.msg
                 binding.apply {
 
-                    if (viewModel.logInRespond.value!!.errNum == "S000")
+                    if (errNum == "S000")
                     // navigate to Home Fragment
-                    else if (viewModel.logInRespond.value!!.errNum == "E007")
-                        emailEditText.error = viewModel.logInRespond.value!!.msg
-                    else if (viewModel.logInRespond.value!!.errNum == "E1001" || viewModel.logInRespond.value!!.errNum == "E002")
-                        passwordEditText.error = viewModel.logInRespond.value!!.msg
+                    else if (errNum == "E007")
+                        emailEditText.error = msg
+                    else if (errNum == "E1001" || errNum == "E002")
+                        passwordEditText.error = msg
 
                 }
             }

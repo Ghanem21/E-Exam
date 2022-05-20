@@ -1,10 +1,13 @@
 package com.example.e_exam.network
 
+import com.example.e_exam.network.checkExistExam.CheckExistExamRespond
 import com.example.e_exam.network.levelsAndDepartments.LevelAndDepartmentRespond
 import com.example.e_exam.network.logIn.LogInRespond
 import com.example.e_exam.network.logOut.LogOutRespond
+import com.example.e_exam.network.mcqOptions.GetMcqOptionsRespond
 import com.example.e_exam.network.signUp.RegisterRespond
 import com.example.e_exam.network.studentSubject.GetStudentSubjectRespond
+import com.example.e_exam.network.viewExam.ExamQuestionRespond
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -58,6 +61,25 @@ interface ExamApiService {
         @Query("lang") lang: String,
         @Header("Authorization") token: String
     ): GetStudentSubjectRespond
+
+    @GET("check_exists_exam")
+    suspend fun checkExistExam(
+        @Query("subject_id") id: Int,
+        @Header("Authorization") token: String
+    ): CheckExistExamRespond
+
+    @GET("exam_view")
+    suspend fun getExamQuestion(
+        @Query("exam_id") examId:Int,
+        @Query("subject_id") subjectId:Int,
+        @Header("Authorization") token: String
+    ):ExamQuestionRespond
+
+    @GET("return_options")
+    suspend fun getMcqOptions(
+        @Query("mcq_id") id : Int,
+        @Header("Authorization") token: String
+    ):GetMcqOptionsRespond
 }
 
 //object to make singleton from the retrofit

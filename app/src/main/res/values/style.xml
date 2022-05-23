@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Radio Button style -->
+    <style name="RadioButton"
+        parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+    </style>
+
+    <!-- Divider style -->
+    <style name="Divider" parent="">
+        <item name="android:background">?attr/dividerHorizontal</item>
+    </style>
+
+    <!-- TextView style for an order summary entry -->
+    <style name="Question.Text" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceHeadline5</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

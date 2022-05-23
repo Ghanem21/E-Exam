@@ -6,5 +6,5 @@ data class GetMcqOptionsRespond(
     val status: Boolean,
     val errNum: String,
     val msg: String,
-    @Json(name  = "Options") val options :List<Option>
+    @Json(name  = "Options") val options :List<Option>?
 )

@@ -7,6 +7,7 @@ import com.example.e_exam.network.logOut.LogOutRespond
 import com.example.e_exam.network.mcqOptions.GetMcqOptionsRespond
 import com.example.e_exam.network.signUp.RegisterRespond
 import com.example.e_exam.network.studentSubject.GetStudentSubjectRespond
+import com.example.e_exam.network.submitExam.SubmitExamRespond
 import com.example.e_exam.network.viewExam.ExamQuestionRespond
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -80,6 +81,14 @@ interface ExamApiService {
         @Query("mcq_id") id : Int,
         @Header("Authorization") token: String
     ):GetMcqOptionsRespond
+
+    @FormUrlEncoded
+    @POST("submit_exam")
+    suspend fun submitExam(
+        @Header("Authorization") token: String,
+        @Field("exam_id") examId: Int,
+        @Field("student_answer[]") answers : List<String>,
+    ):SubmitExamRespond
 }
 
 //object to make singleton from the retrofit

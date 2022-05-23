@@ -13,6 +13,7 @@ data class Subject(
     @Json(name = "levels") val level : Level,
     @Json(name = "departments") val department: Department,
     @Json(name = "professors") val professor: Professor,
+    @Json(name = "subject_image") val imgUrl: String
 
 
 

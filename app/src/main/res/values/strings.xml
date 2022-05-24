@@ -28,5 +28,6 @@
     <string name="back_to_home">Back To Home</string>
     <string name="name">Name:</string>
     <string name="log_out">Log Out</string>
+    <string name="thanks_for_submit">Thanks For Submit</string>
 
 </resources>

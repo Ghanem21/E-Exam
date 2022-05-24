@@ -1,7 +1,9 @@
 package com.example.e_exam.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var parentJob: Job
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var adapter:SubjectAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +45,14 @@ class HomeFragment : Fragment() {
             requireContext().getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         sharedViewModel.setToken(sharedPreferences.getString("token", "")!!)
 
+        sharedViewModel.setRefresh(true)
         val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
         coroutineScope.launch {
             if (sharedViewModel.getStudentSubject().await()) {
-                binding.recyclerview.adapter =
-                    SubjectAdapter(sharedViewModel.subjects, sharedViewModel.token.value!!)
+                adapter = SubjectAdapter(sharedViewModel.subjects, sharedViewModel.token.value!!)
+                binding.recyclerview.adapter = adapter
             }
-
+            sharedViewModel.setRefresh(false)
         }
 
     }
@@ -57,11 +61,14 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         parentJob.cancel()
     }
+
     fun onRefresh(){
         sharedViewModel.setRefresh(true)
         val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
         coroutineScope.launch {
             sharedViewModel.getStudentSubject().await()
+            adapter = SubjectAdapter(sharedViewModel.subjects, sharedViewModel.token.value!!)
+            binding.recyclerview.adapter = adapter
             sharedViewModel.setRefresh(false)
         }
     }

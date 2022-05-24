@@ -10,7 +10,6 @@ import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_exam.databinding.QuestionCardViewBinding
 import com.example.e_exam.network.ExamApi
-import com.example.e_exam.network.viewExam.Question
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,12 +26,12 @@ class QuestionAdapter(private val questionsId: List<Int>, private val token: Str
         fun bind(questionId: Int, token: String) {
             answers.add(null.toString())
             CoroutineScope(Dispatchers.Main).launch {
-                try {
+                //try {
                     val getMcqOptionsRespond =
                         ExamApi.retrofitService.getMcqOptions(questionId, token)
                     val num = getMcqOptionsRespond.options!!.size
                     val radioButtons: MutableList<AppCompatRadioButton> = mutableListOf()
-                    binding.questionTv.text = getMcqOptionsRespond.options[adapterPosition].mcq.questionName
+                binding.questionTv.text = getMcqOptionsRespond.options[adapterPosition].mcq.questionName
                     repeat(num) {
                         radioButtons.add(AppCompatRadioButton(binding.layout.context))
                     }
@@ -60,11 +59,10 @@ class QuestionAdapter(private val questionsId: List<Int>, private val token: Str
                         answers[adapterPosition] = radioButtons[i].text.toString()
                         Log.d("TAG", "getAnswer: $answers")
                     }
-                } catch (ex: Exception) {
+                /*} catch (ex: Exception) {
                     Log.d("TAG", "onBindViewHolder: " + ex.message)
-                }
+                }*/
             }
-            binding.executePendingBindings()
         }
     }
 

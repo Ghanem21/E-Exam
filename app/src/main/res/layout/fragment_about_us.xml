@@ -38,7 +38,6 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="casual"
                 android:text="@string/back_end_developer"
-                android:textColor="@color/black"
                 android:textSize="25sp"
                 tools:ignore="HardcodedText" />
 
@@ -81,7 +80,6 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="casual"
                 android:text="@string/android_developer"
-                android:textColor="@color/black"
                 android:textSize="25sp" />
 
 
@@ -118,9 +116,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fathy"
                 android:layout_marginStart="10dp"
-                android:text="@string/front_end_developer"
                 android:fontFamily="casual"
-                android:textColor="@color/black"
+                android:text="@string/front_end_developer"
                 android:textSize="25sp" />
 
 
@@ -165,7 +162,6 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="casual"
                 android:text="@string/android_developer"
-                android:textColor="@color/black"
                 android:textSize="25sp" />
 
 

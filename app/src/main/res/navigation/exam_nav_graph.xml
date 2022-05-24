@@ -19,9 +19,5 @@
         android:id="@+id/gradeViewFragment"
         android:name="com.example.e_exam.fragment.GradeViewFragment"
         android:label="fragment_grade_view"
-        tools:layout="@layout/fragment_grade_view" >
-        <argument
-            android:name="grade"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_grade_view" />
 </navigation>

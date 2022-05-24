@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_exam.network.ExamApi
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ExamViewModel: ViewModel() {
@@ -18,13 +16,14 @@ class ExamViewModel: ViewModel() {
     val questionsId:LiveData<List<Int>> = _questionsId
 
     private val _examId = MutableLiveData<Int>()
-    val examId : LiveData<Int> = _examId
+    private val examId : LiveData<Int> = _examId
 
     private val _scored = MutableLiveData<Int>()
-    val scored : LiveData<Int> = _scored
 
     private val _total = MutableLiveData<Int>()
-    val total : LiveData<Int> = _total
+
+    private val _endExamTime = MutableLiveData<Long>()
+    val endExamTime : LiveData<Long> = _endExamTime
 
     private val _grade = MutableLiveData<String>()
     val grade:LiveData<String> = _grade
@@ -38,17 +37,22 @@ class ExamViewModel: ViewModel() {
         _questionsId.value = questionsId
     }
 
-    fun submitAnswers(answers : List<String>): Deferred<String> {
-        return viewModelScope.async {
+    fun submitAnswers(answers : List<String>) {
+         viewModelScope.launch {
             val submitExamRespond = ExamApi.retrofitService.submitExam(token.value!!,
                 examId.value!!,answers)
-            _total.value = submitExamRespond.grade!!.total
+            Log.d("TAG", "submitAnswers: " + submitExamRespond.grade!!.total)
+            _total.value = submitExamRespond.grade.total
             _scored.value = submitExamRespond.grade.scored
-            return@async "${submitExamRespond.grade!!.scored} / + ${submitExamRespond.grade.total}"
+            _grade.value = "${submitExamRespond.grade.scored} / ${submitExamRespond.grade.total}"
         }
     }
 
-    fun setGrade(grade:String){
-        _grade.value = grade
+    fun setExamId(id : Int){
+        _examId.value = id
+    }
+
+    fun setExamEndTime(long: Long){
+        _endExamTime.value = long
     }
 }

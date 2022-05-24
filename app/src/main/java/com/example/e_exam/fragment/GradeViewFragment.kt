@@ -11,9 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.e_exam.BottomNavigation
 import com.example.e_exam.R
 import com.example.e_exam.databinding.FragmentGradeViewBinding
-import com.example.e_exam.databinding.FragmentHomeBinding
 import com.example.e_exam.viewModels.ExamViewModel
-import com.example.e_exam.viewModels.SharedViewModel
 
 
 class GradeViewFragment : Fragment() {
@@ -32,8 +30,11 @@ class GradeViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.gradeFragment = this
-        binding.grade.text = viewModel.grade.value
+        binding.apply {
+            gradeFragment = this@GradeViewFragment
+            examViewModel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
     }
 
     fun returnHome() {

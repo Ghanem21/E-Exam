@@ -7,6 +7,9 @@
         <variable
             name="gradeFragment"
             type="com.example.e_exam.fragment.GradeViewFragment" />
+        <variable
+            name="examViewModel"
+            type="com.example.e_exam.viewModels.ExamViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +22,7 @@
             android:id="@+id/thank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thanks For Submit"
+            android:text="@string/thanks_for_submit"
             android:textAppearance="?attr/textAppearanceHeadline2"
             android:textColor="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,11 +34,11 @@
             android:id="@+id/grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline3"
-            android:text="0/3"
+            android:textAppearance="?attr/textAppearanceHeadline2"
+            android:text="@{examViewModel.grade}"
             app:layout_constraintBottom_toBottomOf="@id/thank"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="85dp" />
+            android:layout_marginEnd="16dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/submitAnswers"

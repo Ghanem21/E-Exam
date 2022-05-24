@@ -1,26 +1,28 @@
 package com.example.e_exam.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_exam.ExamActivity
+import com.example.e_exam.R
 import com.example.e_exam.databinding.SubjectCardViewBinding
-import com.example.e_exam.fragment.HomeFragmentDirections
 import com.example.e_exam.network.ExamApi
 import com.example.e_exam.network.studentSubject.Subject
 import com.example.e_exam.network.viewExam.Question
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.lang.System.exit
 import java.text.SimpleDateFormat
 import java.util.*
-import java.sql.Timestamp
 
 class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val token: String) :
     RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder>() {
@@ -82,8 +84,8 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SubjectAdapter.SubjectViewHolder {
-        return SubjectAdapter.SubjectViewHolder(
+    ): SubjectViewHolder {
+        return SubjectViewHolder(
             SubjectCardViewBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -97,9 +99,9 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
         holder.bind(subject, token)
         holder.binding.card.setOnClickListener {
             val currentTime = System.currentTimeMillis()
-            var questions: List<Question> = listOf()
+            var questions: List<Question>
             if (currentTime < SubjectViewHolder.endExamTime[position]) {
-                val coroutineScope = CoroutineScope(Dispatchers.IO)
+                val coroutineScope = CoroutineScope(Dispatchers.Main)
                 coroutineScope.launch {
                     try {
                         val end = async {
@@ -118,18 +120,40 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                                 val bundle = Bundle()
                                 val list = mutableListOf<Int>()
                                 for (question in questions)
-                                    list.add(question.id)
+                                    list.add(question.mcqId.toInt())
                                 bundle.putIntegerArrayList("question", list as ArrayList<Int>)
                                 bundle.putString("token",token)
                                 bundle.putInt("examId",holder.examId)
+                                bundle.putLong("endExamTime",SubjectViewHolder.endExamTime[position])
+                                intent.putExtras(bundle)
                                 holder.binding.root.context.startActivity(intent)
+                                val activity = holder.binding.root.context as Activity
+                                activity.finish()
                             } else
-                                Log.d("TAG", "getExamQuestion: " + examQuestionRespond.msg)
+                            {
+                                MaterialAlertDialogBuilder(holder.binding.root.context)
+                                    .setTitle("Permission Denied\uD83D\uDED1✋")
+                                    .setMessage(examQuestionRespond.msg)
+                                    .setCancelable(false)
+                                    .setIcon(R.drawable.logo)
+                                    .setPositiveButton("OK") { _, _ ->
+                                    }
+                                    .show()
+                            }
                         } catch (ex: Exception) {
                         Log.d("TAG", "getStudentSubject: " + ex.message)
                     }
 
                 }
+            }else{
+                MaterialAlertDialogBuilder(holder.binding.root.context)
+                    .setTitle("No Exam available\uD83D\uDE14")
+                    .setMessage("Wait us soon,we will provide you with more exam\uD83D\uDE0A")
+                    .setCancelable(false)
+                    .setIcon(R.drawable.logo)
+                    .setPositiveButton("OK") { _, _ ->
+                    }
+                    .show()
             }
         }
     }

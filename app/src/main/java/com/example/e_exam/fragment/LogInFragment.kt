@@ -72,6 +72,7 @@ class LogInFragment : Fragment() {
                         val intent = Intent(requireContext(),BottomNavigation::class.java)
                         viewModel.saveDate(requireContext())
                         startActivity(intent)
+                        requireActivity().finish()
                     }
                     else if (errNum == "E007")
                         emailEditText.error = msg

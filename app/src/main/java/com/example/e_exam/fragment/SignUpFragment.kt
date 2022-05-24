@@ -16,6 +16,7 @@ import com.example.e_exam.bindDepartment
 import com.example.e_exam.bindLevel
 import com.example.e_exam.databinding.FragmentSignUpBinding
 import com.example.e_exam.viewModels.SignUpViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 
 
@@ -103,8 +104,17 @@ class SignUpFragment : Fragment() {
                 val msg = viewModel.registerRespond.value!!.msg
                 binding.apply {
 
-                    if (errNum == "S000")
-                    // navigate to Home Fragment
+                    if (errNum == "S000") {
+                        MaterialAlertDialogBuilder(binding.root.context)
+                            .setTitle("Welcome ${username}\uD83E\uDD70")
+                            .setMessage("your request send to admin\uD83E\uDD70")
+                            .setCancelable(false)
+                            .setIcon(R.drawable.logo)
+                            .setPositiveButton("OK") { _, _ ->
+                                findNavController().navigate(R.id.action_signUpFragment_to_logInFragment)
+                            }
+                            .show()
+                    }
                     else if (errNum == "E007")
                         emailEditText.error = msg
                     else if (errNum == "E1001" || errNum == "E002")

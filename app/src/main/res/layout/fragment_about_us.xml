@@ -178,11 +178,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Supervision"
                 android:gravity="center"
+                android:text="Supervisors"
+                android:textColor="@color/orange_500"
                 android:textSize="30sp"
-                android:textStyle="italic||bold"
-                android:textColor="@color/orange_500"/>
+                android:textStyle="italic||bold" />
 
         </RelativeLayout>
 

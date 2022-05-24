@@ -1,6 +1,9 @@
 package com.example.e_exam.fragment
 
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +13,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.e_exam.BottomNavigation
 import com.example.e_exam.R
 import com.example.e_exam.databinding.FragmentLogInBinding
 import com.example.e_exam.viewModels.LogInViewModel
@@ -64,7 +68,11 @@ class LogInFragment : Fragment() {
                 binding.apply {
 
                     if (errNum == "S000")
-                    // navigate to Home Fragment
+                    {
+                        val intent = Intent(requireContext(),BottomNavigation::class.java)
+                        viewModel.saveDate(requireContext())
+                        startActivity(intent)
+                    }
                     else if (errNum == "E007")
                         emailEditText.error = msg
                     else if (errNum == "E1001" || errNum == "E002")

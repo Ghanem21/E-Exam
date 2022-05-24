@@ -15,5 +15,16 @@
     <string name="home">Home</string>
     <string name="about_us">About Us</string>
     <string name="submit">submit</string>
+    <string name="ahmed_hamada">Ahmed Hamada</string>
+    <string name="back_end_developer">Back-End Developer</string>
+    <string name="img">img</string>
+    <string name="abdelrhman_ghanem">Abdelrhman Ghanem</string>
+    <string name="android_developer">Android Developer</string>
+    <string name="abdallah_fathy">AbdAllah Fathy</string>
+    <string name="front_end_developer">Front-End Developer</string>
+    <string name="abdulrahman_ragab">Abdulrahman Ragab</string>
+    <string name="supervisors">Supervisors</string>
+    <string name="dr_amr_abohany">Dr. Amr Abohany</string>
+    <string name="eng_rashwan">Eng. Rashwan</string>
 
 </resources>

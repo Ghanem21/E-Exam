@@ -1,5 +1,7 @@
 package com.example.e_exam.viewModels
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -32,4 +34,14 @@ class LogInViewModel : ViewModel() {
         }.await()
     }
 
+    fun saveDate(context: Context){
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences("PREFERENCE_NAME",
+            Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("studentId" , logInRespond.value!!.student!!.id)
+        editor.putString("studentName" , logInRespond.value!!.student!!.name)
+        editor.putString("studentEmail" , logInRespond.value!!.student!!.email)
+        editor.putString("token" , logInRespond.value!!.student!!.token)
+        editor.apply()
+    }
 }

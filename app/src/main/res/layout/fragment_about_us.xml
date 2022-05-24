@@ -25,10 +25,11 @@
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="casual"
-                android:textStyle="bold"
-                android:text="Ahmed Hamada"
+                android:textStyle="bold|italic"
+                android:text="@string/ahmed_hamada"
                 android:textColor="@color/orange_500"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,16 +37,18 @@
                 android:layout_below="@+id/hamada"
                 android:layout_marginStart="10dp"
                 android:fontFamily="casual"
-                android:text="Back-End Developer"
+                android:text="@string/back_end_developer"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                tools:ignore="HardcodedText" />
 
 
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/hamada" />
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/hamada"
+                android:contentDescription="@string/img" />
         </RelativeLayout>
 
 
@@ -60,23 +63,24 @@
                 android:id="@+id/ghanem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="casual"
-                android:textStyle="bold"
-                android:text="Abdulrahman Ghanem"
+                android:text="@string/abdelrhman_ghanem"
                 android:textColor="@color/orange_500"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:textStyle="bold|italic"
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ghanem"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
                 android:fontFamily="casual"
-                android:text="Android Developer"
+                android:text="@string/android_developer"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
 
@@ -84,7 +88,8 @@
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="@drawable/ghanem" />
+                android:background="@drawable/ghanem"
+                android:contentDescription="@string/img" />
         </RelativeLayout>
 
 
@@ -102,17 +107,18 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="casual"
-                android:text="AbdAllah Fathy"
-                android:textStyle="bold"
+                android:text="@string/abdallah_fathy"
                 android:textColor="@color/orange_500"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textStyle="bold|italic"
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fathy"
                 android:layout_marginStart="10dp"
-                android:text="Front-End Developer"
+                android:text="@string/front_end_developer"
                 android:fontFamily="casual"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
@@ -121,9 +127,10 @@
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="30dp"
-                android:background="@drawable/fathy" />
+                android:background="@drawable/fathy"
+                android:contentDescription="@string/img" />
         </RelativeLayout>
 
 
@@ -140,23 +147,24 @@
                 android:id="@+id/herfy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="casual"
-                android:text="Abdulrahman Ragab"
+                android:text="@string/abdulrahman_ragab"
                 android:textColor="@color/orange_500"
-                android:textSize="28sp" />
+                android:textSize="28sp"
+                android:textStyle="bold|italic"
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/herfy"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
                 android:fontFamily="casual"
-                android:text="Android Developer"
+                android:text="@string/android_developer"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
 
@@ -164,7 +172,8 @@
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="@drawable/herfy" />
+                android:background="@drawable/herfy"
+                android:contentDescription="@string/img" />
         </RelativeLayout>
 
 
@@ -179,10 +188,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Supervisors"
+                android:text="@string/supervisors"
                 android:textColor="@color/orange_500"
                 android:textSize="30sp"
-                android:textStyle="italic||bold" />
+                android:textStyle="bold|italic" />
 
         </RelativeLayout>
 
@@ -197,13 +206,15 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="25dp"
-                android:background="@drawable/abohany" />
+                android:background="@drawable/abohany"
+                android:contentDescription="@string/img" />
 
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="230dp"
-                android:background="@drawable/rashwan" />
+                android:background="@drawable/rashwan"
+                android:contentDescription="@string/img" />
 
 
         </RelativeLayout>
@@ -223,23 +234,25 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="casual"
-                android:text="Dr. Amr Abohany"
-                android:textStyle="bold"
+                android:text="@string/dr_amr_abohany"
+                android:textStyle="bold|italic"
                 android:textColor="@color/orange_500"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:id="@+id/rashwan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:fontFamily="casual"
-                android:text="Eng. Rashwan"
+                android:text="@string/eng_rashwan"
                 android:textColor="@color/orange_500"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic"
+                tools:ignore="RelativeOverlap" />
 
 
         </RelativeLayout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_gragh"
-    app:startDestination="@id/viewExamFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/logInFragment"
@@ -34,8 +34,4 @@
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true"/>
     </fragment>
-    <fragment
-        android:id="@+id/viewExamFragment"
-        android:name="com.example.e_exam.fragment.ViewExamFragment"
-        android:label="ViewExamFragment" />
 </navigation>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exam_nav_graph"
+    app:startDestination="@id/viewExamFragment2">
+
+    <fragment
+        android:id="@+id/viewExamFragment2"
+        android:name="com.example.e_exam.fragment.ViewExamFragment"
+        android:label="ViewExamFragment" >
+        <action
+            android:id="@+id/action_viewExamFragment2_to_gradeViewFragment"
+            app:destination="@id/gradeViewFragment"
+            app:popUpTo="@id/viewExamFragment2"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gradeViewFragment"
+        android:name="com.example.e_exam.fragment.GradeViewFragment"
+        android:label="fragment_grade_view"
+        tools:layout="@layout/fragment_grade_view" >
+        <argument
+            android:name="grade"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -52,8 +52,9 @@ class SplashScreenFragment : Fragment() {
             if(sharedPreferences.contains("token")) {
                 startActivity(Intent(requireContext(), BottomNavigation::class.java))
                 requireActivity().finish()
+            }else{
+                findNavController().navigate(R.id.action_splashScreenFragment_to_logInFragment)
             }
-            findNavController().navigate(R.id.action_splashScreenFragment_to_logInFragment)
         }
     }
 }

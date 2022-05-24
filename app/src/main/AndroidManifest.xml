@@ -13,6 +13,9 @@
         android:theme="@style/Theme.EExam"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ExamActivity"
+            android:exported="false" />
+        <activity
             android:name=".BottomNavigation"
             android:exported="false" />
         <activity

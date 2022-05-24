@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="subject"
+            type="com.example.e_exam.network.studentSubject.Subject" />
+
+        <variable
+            name="exam"
+            type="String" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/subjectImg"
+                imageUrl="@{subject.imgUrl}"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                tools:background="@android:color/darker_gray"
+                android:contentDescription="@string/img" />
+
+            <TextView
+                android:id="@+id/subjectName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{subject.name}"
+                android:textColor="@color/white"
+                android:background="@android:color/transparent"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:layout_margin="16dp"
+                android:layout_alignBottom="@+id/subjectImg"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/professorName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subjectImg"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{subject.professor.toString()}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subjectDepartment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{subject.department.toString()}"
+                android:layout_below="@id/professorName"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/subjectLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/professorName"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_toEndOf="@id/subjectDepartment"
+                android:text="@{subject.level.toString()}"
+                android:textAppearance="?attr/textAppearanceBody1" />
+
+            <TextView
+                android:id="@+id/examTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/professorName"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="16dp"
+                android:text="@{exam}"
+                android:textAppearance="?attr/textAppearanceBody1" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

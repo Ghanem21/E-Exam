@@ -4,8 +4,10 @@ import android.view.animation.AnimationUtils.loadAnimation
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
+import coil.load
 import com.example.e_exam.fragment.SplashScreenFragment
 import com.example.e_exam.network.levelsAndDepartments.Department
 import com.example.e_exam.network.levelsAndDepartments.Level
@@ -52,6 +54,17 @@ fun bindLevel(autoCompleteTextView: AutoCompleteTextView, levels: LiveData<List<
                     items
                 )
             )
+        }
+    }
+}
+@BindingAdapter("imageUrl")
+fun bindImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val url = "https://e-exam.ahmed-projects.me$imgUrl"
+        val imgUri = url.toUri().buildUpon().scheme("https").build()
+        imgView.load(imgUri) {
+            placeholder(R.drawable.loading_animation)
+            error(R.drawable.ic_broken_image)
         }
     }
 }

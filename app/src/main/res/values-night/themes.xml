@@ -14,5 +14,7 @@
         <!-- Customize your theme here. -->
         <!-- Radio buttons. -->
         <item name="radioButtonStyle">@style/RadioButton</item>
+        <item name="colorAccent">@color/orange_200</item>
+        <item name="android:tint">@color/orange_200</item>
     </style>
 </resources>

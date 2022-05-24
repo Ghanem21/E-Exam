@@ -10,6 +10,7 @@ import com.example.e_exam.network.studentSubject.Subject
 import com.example.e_exam.network.viewExam.Question
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.util.*
 
 class SharedViewModel : ViewModel() {
@@ -31,7 +32,7 @@ class SharedViewModel : ViewModel() {
     init {
         _questions.value = listOf()
         _token.value =
-            "bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZS1leGFtLmFobWVkLXByb2plY3RzLm1lXC9hcGlcL3N0dWRlbnRcL0xvZ2luIiwiaWF0IjoxNjUzMTk3ODU5LCJleHAiOjE2NTMyMDE0NTksIm5iZiI6MTY1MzE5Nzg1OSwianRpIjoiOEo3SEtPcmhFZTU3RzFCaSIsInN1YiI6MywicHJ2IjoiOTUyNDk0NDE2MDFlNDdlZjI0ZGY2MmNjZWE4YTVkZDFmODNmNGZlMiJ9.YntkfC9KqmNZq1ufNXVob6xt-0IJImLAPavfXXng3YA"
+            "bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZS1leGFtLmFobWVkLXByb2plY3RzLm1lXC9hcGlcL3N0dWRlbnRcL0xvZ2luIiwiaWF0IjoxNjUzMzcwMzExLCJleHAiOjE2NTMzODgzMTEsIm5iZiI6MTY1MzM3MDMxMSwianRpIjoiYlhsZml3cHBtVVI2YUJuZSIsInN1YiI6MywicHJ2IjoiOTUyNDk0NDE2MDFlNDdlZjI0ZGY2MmNjZWE4YTVkZDFmODNmNGZlMiJ9.fC7LC1-LDdQffxkA_Qa6D7Y92fzMBHWeTzrYWODEPXY"
         _lang.value = Locale.getDefault().language
     }
 
@@ -70,5 +71,12 @@ class SharedViewModel : ViewModel() {
 
     fun SetToken(token: String) {
         _token.value = "bearer " + token
+    }
+
+    fun submitAnswers(answers : List<String>){
+        viewModelScope.launch {
+            val submitExamRespond = ExamApi.retrofitService.submitExam(token.value!!,7,answers)
+            Log.d("TAG", "submitAnswers: " + submitExamRespond.grade!!.scored + "/" + submitExamRespond.grade.total)
+        }
     }
 }

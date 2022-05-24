@@ -6,5 +6,5 @@ data class SubmitExamRespond(
     val status: Boolean,
     val errNum: String,
     val msg: String,
-    @Json(name = "grade_info") val grade : Grade
+    @Json(name = "grade_info") val grade : Grade?
 )

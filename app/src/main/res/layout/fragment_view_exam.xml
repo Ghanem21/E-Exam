@@ -7,18 +7,33 @@
         <variable
             name="sharedViewModel"
             type="com.example.e_exam.viewModels.SharedViewModel" />
+        <variable
+            name="viewExamFragment"
+            type="com.example.e_exam.fragment.ViewExamFragment" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
         tools:context=".fragment.ViewExamFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/question_card_view"/>
-    </FrameLayout>
+            tools:listitem="@layout/question_card_view" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitAnswers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:onClick="@{() -> viewExamFragment.submit()}"
+            android:stateListAnimator="@null"
+            android:text="@string/submit"
+            app:cornerRadius="4dp" />
+
+    </LinearLayout>
 </layout>

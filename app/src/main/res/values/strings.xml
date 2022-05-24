@@ -23,9 +23,10 @@
     <string name="abdallah_fathy">AbdAllah Fathy</string>
     <string name="front_end_developer">Front-End Developer</string>
     <string name="abdulrahman_ragab">Abdulrahman Ragab</string>
-    <string name="supervisors">Supervisors</string>
+    <string name="supervisor">Supervisor</string>
     <string name="dr_amr_abohany">Dr. Amr Abohany</string>
-    <string name="eng_rashwan">Eng. Rashwan</string>
     <string name="back_to_home">Back To Home</string>
+    <string name="name">Name:</string>
+    <string name="log_out">Log Out</string>
 
 </resources>

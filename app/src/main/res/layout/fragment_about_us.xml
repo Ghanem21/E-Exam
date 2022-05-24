@@ -188,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/supervisors"
+                android:text="@string/supervisor"
                 android:textColor="@color/orange_500"
                 android:textSize="30sp"
                 android:textStyle="bold|italic" />
@@ -203,17 +203,12 @@
             >
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="25dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="100dp"
                 android:background="@drawable/abohany"
-                android:contentDescription="@string/img" />
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="230dp"
-                android:background="@drawable/rashwan"
                 android:contentDescription="@string/img" />
 
 
@@ -231,28 +226,17 @@
                 android:id="@+id/abohany"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="casual"
                 android:text="@string/dr_amr_abohany"
-                android:textStyle="bold|italic"
                 android:textColor="@color/orange_500"
-                android:textSize="25sp"
+                android:textSize="30sp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="100dp"
+                android:textStyle="bold|italic"
                 tools:ignore="RelativeOverlap" />
 
-            <TextView
-                android:id="@+id/rashwan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="casual"
-                android:text="@string/eng_rashwan"
-                android:textColor="@color/orange_500"
-                android:textSize="25sp"
-                android:textStyle="bold|italic"
-                tools:ignore="RelativeOverlap" />
 
 
         </RelativeLayout>

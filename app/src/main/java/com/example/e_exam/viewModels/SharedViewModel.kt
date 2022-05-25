@@ -1,21 +1,33 @@
 package com.example.e_exam.viewModels
 
+import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.e_exam.MainActivity
+import com.example.e_exam.R
 import com.example.e_exam.network.ExamApi
 import com.example.e_exam.network.studentSubject.Subject
 import com.example.e_exam.network.viewExam.Question
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.*
 import java.util.*
 
+enum class ExamApiStatus { LOADING, ERROR, DONE }
+
 class SharedViewModel : ViewModel() {
+    // The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<ExamApiStatus>()
+
+    // The external immutable LiveData for the request status
+    val status: LiveData<ExamApiStatus> = _status
+
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> = _token
 
@@ -40,6 +52,7 @@ class SharedViewModel : ViewModel() {
 
     fun getStudentSubject(): Deferred<Boolean> {
         return viewModelScope.async {
+            _status.value = ExamApiStatus.LOADING
             try {
                 val getStudentSubjectRespond = ExamApi.retrofitService.getStudentSubject(
                     lang.value.toString(),
@@ -47,29 +60,42 @@ class SharedViewModel : ViewModel() {
                 )
                 if (getStudentSubjectRespond.status)
                     _subjects.value = getStudentSubjectRespond.subject!!
-                else
+                else {
                     Log.d("TAG", "getStudentSubject: " + getStudentSubjectRespond.msg)
+                    return@async false
+                }
+                _status.value = ExamApiStatus.DONE
                 return@async true
             } catch (ex: Exception) {
                 Log.d("TAG", "getStudentSubject: " + ex.message)
+                _status.value = ExamApiStatus.ERROR
                 return@async false
             }
         }
     }
-    fun doLogOut(context :Context){
-        try {
-            viewModelScope.launch {
-                val logOutRespond = ExamApi.retrofitService.logOut(token.value!!)
-                if (logOutRespond.status) {
-                    val sharedPreferences: SharedPreferences = context.getSharedPreferences(
-                        "PREFERENCE_NAME",
-                        Context.MODE_PRIVATE
-                    )
-                    sharedPreferences.edit().clear().apply()
-                }
-            }
-        }catch(ex:Exception){
-            Log.d("TAG", "doLogOut: "+  ex.message)
+
+    fun doLogOut(activity: Activity) {
+        Log.d("TAG", "doLogOut: ")
+        viewModelScope.launch {
+            MaterialAlertDialogBuilder(activity)
+                    .setTitle("Are you sure \uD83E\uDD7A?")
+                    .setMessage("you will need log in next time")
+                    .setCancelable(false)
+                    .setIcon(R.drawable.logo)
+                    .setPositiveButton("Yes") { _, _ ->
+                        launch {
+                            val logOutRespond = ExamApi.retrofitService.logOut(token.value!!)
+                            Log.d("TAG", "doLogOut: " + logOutRespond.msg)
+                        }
+                       activity.getSharedPreferences(
+                                    "PREFERENCE_NAME",
+                                    Context.MODE_PRIVATE
+                                ).edit().clear().commit()
+                                activity.startActivity(Intent(activity, MainActivity::class.java))
+                                activity.finish()
+                            }.setNegativeButton("No") { _, _ ->
+                    }
+                    .show()
         }
     }
 
@@ -77,7 +103,7 @@ class SharedViewModel : ViewModel() {
         _token.value = "bearer $token"
     }
 
-    fun setRefresh(boolean: Boolean){
+    fun setRefresh(boolean: Boolean) {
         _refresh.value = boolean
     }
 }

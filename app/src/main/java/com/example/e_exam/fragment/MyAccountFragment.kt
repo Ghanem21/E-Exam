@@ -51,27 +51,10 @@ class MyAccountFragment : Fragment() {
     }
 
     fun doLogOut() {
-        val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
-        coroutineScope.launch {
-            MaterialAlertDialogBuilder(binding.root.context)
-                .setTitle("Are you sure \uD83E\uDD7A?")
-                .setMessage("you will need log in next time")
-                .setCancelable(false)
-                .setIcon(R.drawable.logo)
-                .setPositiveButton("Yes") { _, _ ->
-                    sharedViewModel.doLogOut(requireContext())
-                    startActivity(Intent(requireContext(),MainActivity::class.java))
-                    requireActivity().finish()
-                }
-                .setNegativeButton("No") { _, _ ->
-
-                }
-                .show()
-        }
+        sharedViewModel.doLogOut(requireActivity())
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        parentJob.cancel()
     }
 }

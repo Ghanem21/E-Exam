@@ -1,5 +1,7 @@
 package com.example.e_exam.viewModels
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,14 +22,7 @@ class SharedViewModel : ViewModel() {
     private val _lang = MutableLiveData<String>()
     val lang: LiveData<String> = _lang
 
-    private val _currentExamId = MutableLiveData<Int>()
-    val currentExamId: LiveData<Int> = _currentExamId
-
-    private val _currentSubjectId = MutableLiveData<Int>()
-    val currentSubjectId: LiveData<Int> = _currentSubjectId
-
     private val _questions = MutableLiveData<List<Question>>()
-    val questions: LiveData<List<Question>> = _questions
 
     private val _subjects = MutableLiveData<List<Subject>>()
     val subjects: LiveData<List<Subject>> = _subjects
@@ -59,6 +54,22 @@ class SharedViewModel : ViewModel() {
                 Log.d("TAG", "getStudentSubject: " + ex.message)
                 return@async false
             }
+        }
+    }
+    fun doLogOut(context :Context){
+        try {
+            viewModelScope.launch {
+                val logOutRespond = ExamApi.retrofitService.logOut(token.value!!)
+                if (logOutRespond.status) {
+                    val sharedPreferences: SharedPreferences = context.getSharedPreferences(
+                        "PREFERENCE_NAME",
+                        Context.MODE_PRIVATE
+                    )
+                    sharedPreferences.edit().clear().apply()
+                }
+            }
+        }catch(ex:Exception){
+            Log.d("TAG", "doLogOut: "+  ex.message)
         }
     }
 

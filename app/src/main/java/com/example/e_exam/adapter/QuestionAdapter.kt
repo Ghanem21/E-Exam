@@ -24,9 +24,9 @@ class QuestionAdapter(private val questionsId: List<Int>, private val token: Str
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(questionId: Int, token: String) {
-            answers.add(null.toString())
+
             CoroutineScope(Dispatchers.Main).launch {
-                //try {
+                try {
                     val getMcqOptionsRespond =
                         ExamApi.retrofitService.getMcqOptions(questionId, token)
                     val num = getMcqOptionsRespond.options!!.size
@@ -59,9 +59,9 @@ class QuestionAdapter(private val questionsId: List<Int>, private val token: Str
                         answers[adapterPosition] = radioButtons[i].text.toString()
                         Log.d("TAG", "getAnswer: $answers")
                     }
-                /*} catch (ex: Exception) {
+                } catch (ex: Exception) {
                     Log.d("TAG", "onBindViewHolder: " + ex.message)
-                }*/
+                }
             }
         }
     }
@@ -78,6 +78,7 @@ class QuestionAdapter(private val questionsId: List<Int>, private val token: Str
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val questionId = questionsId[position]
+        answers.add(null.toString())
         holder.bind(questionId, token)
     }
 

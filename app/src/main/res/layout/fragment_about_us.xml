@@ -184,7 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/supervisor"
+                android:text="@string/supervisors"
                 android:textColor="@color/orange_500"
                 android:textSize="30sp"
                 android:textStyle="bold|italic" />
@@ -198,14 +198,15 @@
             android:layout_marginVertical="10dp"
             >
 
+
             <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginHorizontal="100dp"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="75dp"
                 android:background="@drawable/abohany"
                 android:contentDescription="@string/img" />
+
 
 
         </RelativeLayout>
@@ -224,18 +225,87 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="casual"
+                android:layout_centerHorizontal="true"
                 android:text="@string/dr_amr_abohany"
                 android:textColor="@color/orange_500"
                 android:textSize="30sp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginHorizontal="100dp"
                 android:textStyle="bold|italic"
                 tools:ignore="RelativeOverlap" />
 
 
 
         </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            >
+
+
+            <ImageView
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:background="@drawable/abdallah"
+                android:contentDescription="@string/img" />
+
+
+            <ImageView
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/moat"
+                android:contentDescription="@string/img" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            >
+
+
+            <TextView
+                android:id="@+id/rashwan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="casual"
+                android:text="Eng. Rashwan"
+                android:textColor="@color/orange_500"
+                android:textSize="25sp"
+                android:textStyle="bold|italic"
+                tools:ignore="RelativeOverlap" />
+
+            <TextView
+                android:id="@+id/moat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="casual"
+                android:text="@string/eng_moatasem"
+                android:textColor="@color/orange_500"
+                android:textSize="25sp"
+                android:textStyle="bold|italic"
+                tools:ignore="RelativeOverlap" />
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
 
 
     </LinearLayout>

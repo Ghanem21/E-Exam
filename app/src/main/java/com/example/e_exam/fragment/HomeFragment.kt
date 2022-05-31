@@ -60,7 +60,6 @@ class HomeFragment : Fragment() {
             }
             sharedViewModel.setRefresh(false)
         }
-
     }
 
     override fun onDestroyView() {

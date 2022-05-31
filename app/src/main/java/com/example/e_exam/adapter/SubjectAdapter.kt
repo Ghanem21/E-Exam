@@ -54,10 +54,11 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                             checkExistExamRespond.exams[0].endTime.toLong() * 1000
                         val currentTime = System.currentTimeMillis()
                         if (startExamTime[adapterPosition] > currentTime) {
-                            val examTime = getDateFromMilliseconds(startExamTime[adapterPosition])
+                            val examTime = getDateFromMilliseconds(startExamTime[adapterPosition],"dd/MM/yyyy\n HH:mm")
                             binding.exam = examTime
                         } else if (endExamTime[adapterPosition] > currentTime) {
-                            binding.exam = "Running Now"
+                            binding.exam = "Running Now\nend${getDateFromMilliseconds(endExamTime[adapterPosition]," " +
+                                    "HH:mm")}"
                         } else {
                             binding.exam = "No Exam"
                         }
@@ -71,8 +72,8 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
             binding.executePendingBindings()
         }
 
-        private fun getDateFromMilliseconds(millis: Long): String {
-            val dateFormat = "dd/MM/yyyy\n HH:mm"
+        private fun getDateFromMilliseconds(millis: Long,dataFormat: String): String {
+            val dateFormat = dataFormat
             val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
             val calendar = Calendar.getInstance()
 

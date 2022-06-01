@@ -45,8 +45,8 @@ class MyAccountFragment : Fragment() {
         }
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("PREFERENCE_NAME",
             Context.MODE_PRIVATE)
-        binding.name.text = sharedPreferences.getString("studentName","")
-        binding.email.text = sharedPreferences.getString("studentEmail","")
+        /*binding.name.text = sharedPreferences.getString("studentName","")
+        binding.email.text = sharedPreferences.getString("studentEmail","")*/
 
     }
 

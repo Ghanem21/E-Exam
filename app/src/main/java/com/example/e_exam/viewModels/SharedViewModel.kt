@@ -50,7 +50,6 @@ class SharedViewModel : ViewModel() {
         _subjects.value = listOf()
         _token.value = ""
         _lang.value = Locale.getDefault().language
-        _oldExams.value = listOf()
     }
 
     fun getStudentSubject(): Deferred<Boolean> {

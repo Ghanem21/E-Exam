@@ -44,6 +44,7 @@ class MyAccountFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
         binding.oldExamsLayout.viewModel = sharedViewModel
+        binding.personalData.accountFragment = this@MyAccountFragment
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences(
             "PREFERENCE_NAME",
             Context.MODE_PRIVATE
@@ -54,16 +55,12 @@ class MyAccountFragment : Fragment() {
         val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
         coroutineScope.launch {
             sharedViewModel.setRefresh(true)
-            val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
-            coroutineScope.launch {
+            if (sharedViewModel.oldExams.value == null)
+                sharedViewModel.getOldExamRespond().await()
+            adapter = OldExamAdapter(sharedViewModel.oldExams.value ?: listOf())
+            binding.oldExamsLayout.recyclerview.adapter = adapter
+            sharedViewModel.setRefresh(false)
 
-                if (sharedViewModel.oldExams.value == null)
-                    sharedViewModel.getOldExamRespond().await()
-                adapter = OldExamAdapter(sharedViewModel.oldExams.value!!)
-                binding.oldExamsLayout.recyclerview.adapter = adapter
-                sharedViewModel.setRefresh(false)
-
-            }
         }
 
     }
@@ -78,7 +75,7 @@ class MyAccountFragment : Fragment() {
         coroutineScope.launch {
             if (sharedViewModel.oldExams.value == null)
                 sharedViewModel.getOldExamRespond().await()
-            adapter = OldExamAdapter(sharedViewModel.oldExams.value!!)
+            adapter = OldExamAdapter(sharedViewModel.oldExams.value ?: listOf())
             binding.oldExamsLayout.recyclerview.adapter = adapter
             sharedViewModel.setRefresh(false)
         }

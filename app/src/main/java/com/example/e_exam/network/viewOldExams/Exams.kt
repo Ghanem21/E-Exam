@@ -17,7 +17,7 @@ data class Exams(
 
     ) {
     fun getDate(): String {
-        return getDateFromMilliseconds(updateDate, "dd/MM/yyyy\n HH:mm")
+        return getDateFromMilliseconds(updateDate, "dd/MM/yyyy\nHH:mm")
     }
 
     @SuppressLint("SimpleDateFormat")

@@ -17,6 +17,7 @@ import com.example.e_exam.MainActivity
 import com.example.e_exam.R
 import com.example.e_exam.adapter.SubjectAdapter
 import com.example.e_exam.databinding.FragmentHomeBinding
+import com.example.e_exam.viewModels.ExamApiStatus
 import com.example.e_exam.viewModels.SharedViewModel
 import kotlinx.coroutines.*
 
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var parentJob: Job
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var adapter:SubjectAdapter
+    private lateinit var adapter: SubjectAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,20 +53,23 @@ class HomeFragment : Fragment() {
         sharedViewModel.setRefresh(true)
         val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
         coroutineScope.launch {
-            if (sharedViewModel.getStudentSubject().await()) {
-                adapter = SubjectAdapter(sharedViewModel.subjects, sharedViewModel.token.value!!)
-                binding.recyclerview.adapter = adapter
-            }else{
-                Toast.makeText(requireContext(),"need to log in",Toast.LENGTH_SHORT).show()
+            if (sharedViewModel.subjects.value == null)
+                sharedViewModel.getStudentSubject().await()
+            adapter = SubjectAdapter(sharedViewModel.subjects, sharedViewModel.token.value!!)
+            binding.recyclerview.adapter = adapter
+            if (sharedViewModel.token.value == null) {
+                Toast.makeText(requireContext(), "need to log in", Toast.LENGTH_SHORT).show()
                 requireActivity().getSharedPreferences(
                     "PREFERENCE_NAME",
                     Context.MODE_PRIVATE
                 ).edit().clear().apply()
-                startActivity(Intent(requireContext(),MainActivity::class.java))
+                startActivity(Intent(requireContext(), MainActivity::class.java))
                 requireActivity().finish()
             }
+
             sharedViewModel.setRefresh(false)
         }
+
     }
 
     override fun onDestroyView() {
@@ -73,14 +77,15 @@ class HomeFragment : Fragment() {
         parentJob.cancel()
     }
 
-    fun onRefresh(){
+    fun onRefresh() {
         sharedViewModel.setRefresh(true)
         val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
         coroutineScope.launch {
-            sharedViewModel.getStudentSubject().await()
+            if (sharedViewModel.subjects.value == null)
+                sharedViewModel.getStudentSubject().await()
             adapter = SubjectAdapter(sharedViewModel.subjects, sharedViewModel.token.value!!)
             binding.recyclerview.adapter = adapter
-            sharedViewModel.setRefresh(false)
         }
+        sharedViewModel.setRefresh(false)
     }
 }

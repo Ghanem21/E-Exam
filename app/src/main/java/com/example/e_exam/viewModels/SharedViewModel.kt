@@ -46,8 +46,6 @@ class SharedViewModel : ViewModel() {
     val oldExams: LiveData<List<Exams>> = _oldExams
 
     init {
-        _questions.value = listOf()
-        _subjects.value = listOf()
         _token.value = ""
         _lang.value = Locale.getDefault().language
     }
@@ -70,7 +68,8 @@ class SharedViewModel : ViewModel() {
                 return@async true
             } catch (ex: Exception) {
                 Log.d("TAG", "getStudentSubject: " + ex.message)
-                _status.value = ExamApiStatus.ERROR
+                if(subjects.value == null)
+                    _status.value = ExamApiStatus.ERROR
                 return@async false
             }
         }
@@ -111,15 +110,19 @@ class SharedViewModel : ViewModel() {
 
     fun getOldExamRespond(): Deferred<Boolean>{
         return viewModelScope.async {
+            _status.value = ExamApiStatus.LOADING
             try {
                 val getOldExamRespond =
                     ExamApi.retrofitService.getOldExam(token.value!!)
                 _oldExams.value = getOldExamRespond.exams!!
                 Log.d("TAG", "getOldExamRespond: " + getOldExamRespond.status)
+                _status.value = ExamApiStatus.DONE
                 return@async true
 
             }catch (ex :Exception){
                 Log.d("TAG", "onViewCreated: " + ex.message)
+                if(oldExams.value == null)
+                    _status.value = ExamApiStatus.ERROR
                 return@async false
             }
         }

@@ -33,7 +33,7 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
         var examId = -1
 
         companion object {
-            private val startExamTime = mutableListOf<Long>()
+            val startExamTime = mutableListOf<Long>()
             val endExamTime = mutableListOf<Long>()
         }
 
@@ -115,7 +115,7 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                         }
 
                         val examQuestionRespond = end.await()
-                            if (examQuestionRespond.status) {
+                            if (examQuestionRespond.status && SubjectViewHolder.startExamTime[position] < System.currentTimeMillis()) {
                                 questions = examQuestionRespond.questions!!
                                 val intent =
                                     Intent(holder.binding.root.context, ExamActivity::class.java)
@@ -131,11 +131,20 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                                 holder.binding.root.context.startActivity(intent)
                                 val activity = holder.binding.root.context as Activity
                                 activity.finish()
-                            } else
+                            } else if(!examQuestionRespond.status)
                             {
                                 MaterialAlertDialogBuilder(holder.binding.root.context)
                                     .setTitle("Permission Denied\uD83D\uDED1✋")
                                     .setMessage(examQuestionRespond.msg)
+                                    .setCancelable(false)
+                                    .setIcon(R.drawable.logo)
+                                    .setPositiveButton("OK") { _, _ ->
+                                    }
+                                    .show()
+                            }else{
+                                MaterialAlertDialogBuilder(holder.binding.root.context)
+                                    .setTitle("Not open yet\uD83D\uDE14")
+                                    .setMessage("The Exam will open at ${holder.binding.examTime.text}\uD83D\uDE0A")
                                     .setCancelable(false)
                                     .setIcon(R.drawable.logo)
                                     .setPositiveButton("OK") { _, _ ->
@@ -161,6 +170,6 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
     }
 
     override fun getItemCount(): Int {
-        return subjects.value!!.size
+        return subjects.value?.size ?: 0
     }
 }

@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +13,7 @@ import com.example.e_exam.R
 import com.example.e_exam.network.ExamApi
 import com.example.e_exam.network.studentSubject.Subject
 import com.example.e_exam.network.viewExam.Question
+import com.example.e_exam.network.viewOldExams.Exams
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 import java.util.*
@@ -43,11 +42,15 @@ class SharedViewModel : ViewModel() {
 
     val refresh: LiveData<Boolean> = _refresh
 
+    private val _oldExams = MutableLiveData<List<Exams>>()
+    val oldExams: LiveData<List<Exams>> = _oldExams
+
     init {
         _questions.value = listOf()
         _subjects.value = listOf()
         _token.value = ""
         _lang.value = Locale.getDefault().language
+        _oldExams.value = listOf()
     }
 
     fun getStudentSubject(): Deferred<Boolean> {
@@ -90,7 +93,7 @@ class SharedViewModel : ViewModel() {
                        activity.getSharedPreferences(
                                     "PREFERENCE_NAME",
                                     Context.MODE_PRIVATE
-                                ).edit().clear().commit()
+                                ).edit().clear().apply()
                                 activity.startActivity(Intent(activity, MainActivity::class.java))
                                 activity.finish()
                             }.setNegativeButton("No") { _, _ ->
@@ -105,5 +108,21 @@ class SharedViewModel : ViewModel() {
 
     fun setRefresh(boolean: Boolean) {
         _refresh.value = boolean
+    }
+
+    fun getOldExamRespond(): Deferred<Boolean>{
+        return viewModelScope.async {
+            try {
+                val getOldExamRespond =
+                    ExamApi.retrofitService.getOldExam(token.value!!)
+                _oldExams.value = getOldExamRespond.exams!!
+                Log.d("TAG", "getOldExamRespond: " + getOldExamRespond.status)
+                return@async true
+
+            }catch (ex :Exception){
+                Log.d("TAG", "onViewCreated: " + ex.message)
+                return@async false
+            }
+        }
     }
 }

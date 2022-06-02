@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -55,6 +56,11 @@ class HomeFragment : Fragment() {
                 adapter = SubjectAdapter(sharedViewModel.subjects, sharedViewModel.token.value!!)
                 binding.recyclerview.adapter = adapter
             }else{
+                Toast.makeText(requireContext(),"need to log in",Toast.LENGTH_SHORT).show()
+                requireActivity().getSharedPreferences(
+                    "PREFERENCE_NAME",
+                    Context.MODE_PRIVATE
+                ).edit().clear().apply()
                 startActivity(Intent(requireContext(),MainActivity::class.java))
                 requireActivity().finish()
             }

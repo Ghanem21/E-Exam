@@ -1,21 +1,19 @@
 package com.example.e_exam.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import com.example.e_exam.MainActivity
 import com.example.e_exam.R
-import com.example.e_exam.databinding.FragmentHomeBinding
+import com.example.e_exam.adapter.OldExamAdapter
 import com.example.e_exam.databinding.FragmentMyAccountBinding
 import com.example.e_exam.viewModels.SharedViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,6 +24,8 @@ class MyAccountFragment : Fragment() {
     private lateinit var parentJob: Job
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var binding: FragmentMyAccountBinding
+    private lateinit var adapter: OldExamAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,13 +40,31 @@ class MyAccountFragment : Fragment() {
         parentJob = Job()
         binding.apply {
             viewModel = sharedViewModel
-            myAccountFragment = this@MyAccountFragment
+            accountFragment = this@MyAccountFragment
             lifecycleOwner = viewLifecycleOwner
         }
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("PREFERENCE_NAME",
-            Context.MODE_PRIVATE)
-        /*binding.name.text = sharedPreferences.getString("studentName","")
-        binding.email.text = sharedPreferences.getString("studentEmail","")*/
+        binding.oldExamsLayout.viewModel = sharedViewModel
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences(
+            "PREFERENCE_NAME",
+            Context.MODE_PRIVATE
+        )
+        binding.personalData.name.text = sharedPreferences.getString("studentName", "")
+        binding.personalData.email.text = sharedPreferences.getString("studentEmail", "")
+
+        val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
+        coroutineScope.launch {
+            sharedViewModel.setRefresh(true)
+            val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
+            coroutineScope.launch {
+
+                if (sharedViewModel.oldExams.value == null)
+                    sharedViewModel.getOldExamRespond().await()
+                adapter = OldExamAdapter(sharedViewModel.oldExams.value!!)
+                binding.oldExamsLayout.recyclerview.adapter = adapter
+                sharedViewModel.setRefresh(false)
+
+            }
+        }
 
     }
 
@@ -54,7 +72,20 @@ class MyAccountFragment : Fragment() {
         sharedViewModel.doLogOut(requireActivity())
     }
 
+    fun onRefresh() {
+        sharedViewModel.setRefresh(true)
+        val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
+        coroutineScope.launch {
+            if (sharedViewModel.oldExams.value == null)
+                sharedViewModel.getOldExamRespond().await()
+            adapter = OldExamAdapter(sharedViewModel.oldExams.value!!)
+            binding.oldExamsLayout.recyclerview.adapter = adapter
+            sharedViewModel.setRefresh(false)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        parentJob.cancel()
     }
 }

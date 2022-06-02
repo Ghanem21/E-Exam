@@ -58,7 +58,8 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                             binding.exam = examTime
                         } else if (endExamTime[adapterPosition] > currentTime) {
                             binding.exam = "Running Now\nend${getDateFromMilliseconds(endExamTime[adapterPosition]," " +
-                                    "HH:mm")}"
+                                    "dd/MM/yyyy\n" +
+                                    " HH:mm")}"
                         } else {
                             binding.exam = "No Exam"
                         }

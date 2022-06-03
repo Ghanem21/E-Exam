@@ -1,10 +1,8 @@
 package com.example.e_exam
 
-import android.content.Context
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.fragment.NavHostFragment
 
 class MainActivity : AppCompatActivity() {

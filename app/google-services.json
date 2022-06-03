@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "603861822565",
+    "project_id": "smart-exam-5604f",
+    "storage_bucket": "smart-exam-5604f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603861822565:android:b74eb4da04cb028c91ea8c",
+        "android_client_info": {
+          "package_name": "com.example.e_exam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603861822565-qlvjm9adi33p8vkukfti1dgq575fuec0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.e_exam",
+            "certificate_hash": "d9a24e6f01c553db39f8bd241f67e9e2b50d9bd3"
+          }
+        },
+        {
+          "client_id": "603861822565-u5uvn0tkj963f8mjeu1u7t1p0vknivpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBtOM8KL_09ouOzndIR2ovzXsoR7-qHhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603861822565-u5uvn0tkj963f8mjeu1u7t1p0vknivpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

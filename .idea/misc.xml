@@ -6,7 +6,9 @@
         <entry key="..\:/E-Exam/app/src/main/res/drawable-night/home_background.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/drawable-night/ic_baseline_white_person_24.xml" value="0.1655" />
         <entry key="..\:/E-Exam/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/E-Exam/app/src/main/res/drawable/drop_back_shape.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/drawable/dropback_shape.xml" value="0.133" />
+        <entry key="..\:/E-Exam/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/drawable/ic_baseline_person.xml" value="0.1655" />
@@ -21,19 +23,24 @@
         <entry key="..\:/E-Exam/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.10555555555555556" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/activity_exam.xml" value="0.1359375" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/activity_main.xml" value="0.10989583333333333" />
+        <entry key="..\:/E-Exam/app/src/main/res/layout/activity_old_exam.xml" value="0.176" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/exam_card.xml" value="0.10555555555555556" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_about_us.xml" value="0.176" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_grade_view.xml" value="0.109375" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_log_in.xml" value="0.264" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_my_account.xml" value="0.16" />
+        <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_old_exam.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_splash_screen.xml" value="0.22826086956521738" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/fragment_view_exam.xml" value="0.2" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/notification_layout.xml" value="0.16" />
+        <entry key="..\:/E-Exam/app/src/main/res/layout/old_answer_card.xml" value="0.264" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/old_exam_card_view.xml" value="0.23697916666666666" />
+        <entry key="..\:/E-Exam/app/src/main/res/layout/old_exam_latout.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/old_exam_layout.xml" value="0.16" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/option_radio_button.xml" value="0.1" />
+        <entry key="..\:/E-Exam/app/src/main/res/layout/progreess_layout.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/question_card_view.xml" value="0.24324324324324326" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/radio_group.xml" value="0.1" />
         <entry key="..\:/E-Exam/app/src/main/res/layout/subject_card_view.xml" value="0.1" />

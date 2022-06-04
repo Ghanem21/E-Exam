@@ -13,6 +13,7 @@ import com.example.e_exam.R
 import com.example.e_exam.adapter.QuestionAdapter
 import com.example.e_exam.databinding.FragmentViewExamBinding
 import com.example.e_exam.viewModels.ExamViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 
 class ViewExamFragment : Fragment() {
@@ -73,8 +74,19 @@ class ViewExamFragment : Fragment() {
     fun submit() {
         val coroutineScope = CoroutineScope(Dispatchers.Main + parentJob)
         coroutineScope.launch {
-            viewModel.submitAnswers(adapter.getAnswer())
-            findNavController().navigate(R.id.action_viewExamFragment2_to_gradeViewFragment)
+            if(viewModel.submitAnswers(adapter.getAnswer(),requireContext()).await())
+                findNavController().navigate(R.id.action_viewExamFragment2_to_gradeViewFragment)
+            else
+            {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Internet Connection Problem..")
+                    .setMessage("Please try reconnect internet and reSubmit")
+                    .setCancelable(false)
+                    .setIcon(R.drawable.logo)
+                    .setPositiveButton("OK") { _, _ ->
+                    }
+                    .show()
+            }
         }
 
     }

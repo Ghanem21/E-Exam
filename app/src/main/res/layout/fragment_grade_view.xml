@@ -17,6 +17,16 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         tools:context=".fragment.GradeViewFragment">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="16dp"
+            android:onClick="@{()-> gradeFragment.returnHome()}"
+            android:contentDescription="@string/img" />
 
         <TextView
             android:id="@+id/thank"
@@ -39,18 +49,6 @@
             app:layout_constraintBottom_toBottomOf="@id/thank"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/submitAnswers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="8dp"
-            android:onClick="@{() -> gradeFragment.returnHome()}"
-            android:stateListAnimator="@null"
-            android:text="@string/back_to_home"
-            app:cornerRadius="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

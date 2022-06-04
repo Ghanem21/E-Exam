@@ -59,7 +59,7 @@
                 android:fontFamily="casual"
                 android:text="@string/sign_up"
                 android:textAllCaps="true"
-                android:textColor="@color/teal_700"
+                android:textColor="@color/orange_500"
                 android:textSize="36sp" />
 
 

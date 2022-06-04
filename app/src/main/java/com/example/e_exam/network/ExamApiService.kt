@@ -9,6 +9,7 @@ import com.example.e_exam.network.signUp.RegisterRespond
 import com.example.e_exam.network.studentSubject.GetStudentSubjectRespond
 import com.example.e_exam.network.submitExam.SubmitExamRespond
 import com.example.e_exam.network.viewExam.ExamQuestionRespond
+import com.example.e_exam.network.viewOldAnswers.ViewOldAnswerRespond
 import com.example.e_exam.network.viewOldExams.ViewOldExamRespond
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -95,6 +96,12 @@ interface ExamApiService {
     suspend fun getOldExam(
         @Header("Authorization") token: String,
     ):ViewOldExamRespond
+
+    @GET("view_student_exam")
+    suspend fun viewOldAnswers(
+        @Header("Authorization") token: String,
+        @Query("exam_id") examId:Int,
+    ):ViewOldAnswerRespond
 }
 
 //object to make singleton from the retrofit

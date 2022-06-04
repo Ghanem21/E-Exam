@@ -1,12 +1,12 @@
 package com.example.e_exam.adapter
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_exam.ExamActivity
@@ -16,11 +16,7 @@ import com.example.e_exam.network.ExamApi
 import com.example.e_exam.network.studentSubject.Subject
 import com.example.e_exam.network.viewExam.Question
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import java.lang.System.exit
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,7 +37,8 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
             binding.subject = subject
             startExamTime.add(0L)
             endExamTime.add(0L)
-            CoroutineScope(Dispatchers.Main).launch {
+            val coroutineScope = CoroutineScope(Dispatchers.Main)
+                coroutineScope.launch {
                 try {
                     val checkExistExamRespond =
                         ExamApi.retrofitService.checkExistExam(subject.id, token)
@@ -69,6 +66,7 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                 } catch (ex: Exception) {
                     Log.d("TAG", "bind: failed" + ex.message)
                 }
+                coroutineScope.cancel()
             }
             binding.executePendingBindings()
         }
@@ -106,6 +104,12 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                 val coroutineScope = CoroutineScope(Dispatchers.Main)
                 coroutineScope.launch {
                     try {
+                        val dialog = ProgressDialog(holder.binding.root.context)
+                        dialog.setTitle("Waiting....")
+                        dialog.setCancelable(false)
+                        dialog.setIcon(R.drawable.logo)
+                        dialog.setMessage("Getting data please wait\uD83D\uDE0A")
+                        dialog.show()
                         val end = async {
                             return@async ExamApi.retrofitService.getExamQuestion(
                                 holder.examId,
@@ -113,7 +117,7 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                                 token
                             )
                         }
-
+                        dialog.hide()
                         val examQuestionRespond = end.await()
                             if (examQuestionRespond.status && SubjectViewHolder.startExamTime[position] < System.currentTimeMillis()) {
                                 questions = examQuestionRespond.questions!!
@@ -154,7 +158,7 @@ class SubjectAdapter(private val subjects: LiveData<List<Subject>>, private val 
                         } catch (ex: Exception) {
                         Log.d("TAG", "getStudentSubject: " + ex.message)
                     }
-
+                    coroutineScope.cancel()
                 }
             }else{
                 MaterialAlertDialogBuilder(holder.binding.root.context)

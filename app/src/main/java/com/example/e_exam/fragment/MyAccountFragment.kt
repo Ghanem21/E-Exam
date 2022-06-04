@@ -56,7 +56,9 @@ class MyAccountFragment : Fragment() {
             sharedViewModel.setRefresh(true)
             if (sharedViewModel.oldExams.value == null)
                 sharedViewModel.getOldExamRespond().await()
-            adapter = OldExamAdapter(sharedViewModel.oldExams.value ?: listOf())
+            adapter = OldExamAdapter(sharedViewModel.oldExams.value ?: listOf(),
+                sharedViewModel.token.value!!
+            )
             binding.oldExamsLayout.recyclerview.adapter = adapter
             sharedViewModel.setRefresh(false)
 
@@ -74,7 +76,9 @@ class MyAccountFragment : Fragment() {
         coroutineScope.launch {
             if (sharedViewModel.oldExams.value == null)
                 sharedViewModel.getOldExamRespond().await()
-            adapter = OldExamAdapter(sharedViewModel.oldExams.value ?: listOf())
+            adapter = OldExamAdapter(sharedViewModel.oldExams.value ?: listOf(),
+                sharedViewModel.token.value!!
+            )
             binding.oldExamsLayout.recyclerview.adapter = adapter
             sharedViewModel.setRefresh(false)
         }

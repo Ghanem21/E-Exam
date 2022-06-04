@@ -12,6 +12,7 @@ import com.example.e_exam.databinding.QuestionCardViewBinding
 import com.example.e_exam.network.ExamApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 class QuestionAdapter(private val questionsId: List<Int>, private val token: String) :
@@ -24,8 +25,8 @@ class QuestionAdapter(private val questionsId: List<Int>, private val token: Str
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(questionId: Int, token: String) {
-
-            CoroutineScope(Dispatchers.Main).launch {
+            val coroutineScope = CoroutineScope(Dispatchers.Main)
+            coroutineScope.launch {
                 try {
                     val getMcqOptionsRespond =
                         ExamApi.retrofitService.getMcqOptions(questionId, token)
@@ -62,6 +63,7 @@ class QuestionAdapter(private val questionsId: List<Int>, private val token: Str
                 } catch (ex: Exception) {
                     Log.d("TAG", "onBindViewHolder: " + ex.message)
                 }
+                coroutineScope.cancel()
             }
         }
     }
